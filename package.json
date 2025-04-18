@@ -1,0 +1,17 @@
+{
+  "name": "todoserver",
+  "version": "1.0.0",
+  "description": "Server for Todo App",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "compile": "tsc",
+    "start": "node dist/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "typescript": "^5.8.3"
+  }
+}
