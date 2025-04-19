@@ -9,7 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "start": "tsx src/index.ts"
+    "start": "npx tsx src/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.42.0",
     "express": "^5.1.0",
