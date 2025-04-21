@@ -9,13 +9,16 @@
   },
   "type": "module",
   "scripts": {
-    "start": "npx tsx src/index.ts"
+    "start": "npx tsx src/index.ts",
+    "dev": "npx tsx --watch src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.16",
     "drizzle-kit": "^0.31.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
@@ -25,6 +28,8 @@
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.42.0",
     "express": "^5.1.0",
+    "passport": "^0.5.3",
+    "passport-google-oauth20": "^2.0.0",
     "postgres": "^3.4.5"
   }
 }
