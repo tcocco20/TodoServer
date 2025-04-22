@@ -8,7 +8,11 @@ export const authRoutes = (app: any) => {
 
   app.get(
     "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/" })
+    passport.authenticate("google", { failureRedirect: "/" }),
+    (req: any, res: any) => {
+      // Successful authentication, redirect home.
+      res.redirect("/");
+    }
   );
 
   app.get("/api/logout", (req: any, res: any) => {

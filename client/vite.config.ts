@@ -8,12 +8,12 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "http://localhost:3000",
-        // changeOrigin: true,
+        // changeOrigin: true, // Uncomment if you want to change the origin of the host header to the target URL
         // rewrite: (path) => path.replace(/^\/api/, ''), // Uncomment if you want to remove /api prefix
       },
       "/auth/google": {
         target: "http://localhost:3000",
-        // changeOrigin: true,
+        // changeOrigin: true, // Uncomment if you want to change the origin of the host header to the target URL
         // rewrite: (path) => path.replace(/^\/auth\/google/, ''), // Uncomment if you want to remove /auth/google prefix}
       },
     },

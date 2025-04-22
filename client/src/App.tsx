@@ -5,6 +5,7 @@ function App() {
       <p>This is a simple React application.</p>
       <p>It is using TypeScript for type safety.</p>
       <p>Enjoy coding!</p>
+      <a href="/auth/google">Sign In With Google</a>
     </>
   );
 }
