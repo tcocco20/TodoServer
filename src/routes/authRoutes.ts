@@ -17,8 +17,8 @@ export const authRoutes = (app: any) => {
         console.error("Logout error:", err);
         return res.status(500).send("Logout failed");
       }
+      res.send(req.user);
     });
-    res.send(req.user);
   });
 
   app.get("/api/current_user", (req: any, res: any) => {
