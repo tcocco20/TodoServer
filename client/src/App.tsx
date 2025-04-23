@@ -1,11 +1,16 @@
+import { Routes, Route } from "react-router";
+import Layout from "./components/Layout";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 function App() {
   return (
     <>
-      <h1>Welcome to the React App</h1>
-      <p>This is a simple React application.</p>
-      <p>It is using TypeScript for type safety.</p>
-      <p>Enjoy coding!</p>
-      <a href="/auth/google">Sign In With Google</a>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Login />} />
+          <Route path="dashboard" element={<Dashboard />} />
+        </Route>
+      </Routes>
     </>
   );
 }
