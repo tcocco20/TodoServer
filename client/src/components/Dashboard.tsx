@@ -1,5 +1,11 @@
+import ProtectedRoute from "./ProtectedRoute";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <ProtectedRoute>
+      <div>Dashboard</div>
+    </ProtectedRoute>
+  );
 };
 
 export default Dashboard;

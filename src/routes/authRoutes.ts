@@ -23,6 +23,7 @@ export const authRoutes = (app: any) => {
       }
       res.send(req.user);
     });
+    res.redirect("/");
   });
 
   app.get("/api/current_user", (req: any, res: any) => {

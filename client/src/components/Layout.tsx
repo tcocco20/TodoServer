@@ -3,9 +3,11 @@ import Header from "./Header";
 
 export default function Layout() {
   return (
-    <main className="bg-dark text-white" style={{ minHeight: "100vh" }}>
+    <>
       <Header />
-      <Outlet />
-    </main>
+      <main className="container py-5" style={{ minHeight: "100vh" }}>
+        <Outlet />
+      </main>
+    </>
   );
 }
