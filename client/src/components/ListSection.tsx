@@ -1,7 +1,10 @@
 import Col from "react-bootstrap/Col";
+import CloseButton from "react-bootstrap/CloseButton";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import { Todo } from "../types/Todo";
+import { deleteTodo, updateTodo } from "../api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface ListSectionProps {
   title: string;
@@ -10,6 +13,22 @@ interface ListSectionProps {
 }
 
 const ListSection = ({ title, todos, completed }: ListSectionProps) => {
+  const queryClient = useQueryClient();
+
+  const updateMutation = useMutation({
+    mutationFn: updateTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+
   const renderTodos = () => {
     return todos.map((todo) => (
       <Card
@@ -19,9 +38,21 @@ const ListSection = ({ title, todos, completed }: ListSectionProps) => {
         className="p-2 px-lg-3"
       >
         <div className="d-flex justify-content-between align-items-center">
-          <h5>{todo.title}</h5>
+          <CloseButton
+            variant={completed ? "white" : "dark"}
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteMutation.mutate(todo.id);
+            }}
+          />
+          <h5 className="flex-grow-1 text-center">{todo.title}</h5>
           <i
-            className={`bi fs-4 ${completed ? "bi-check-circle" : "bi-circle"}`}
+            onClick={() => {
+              updateMutation.mutate({ ...todo, completed: !todo.completed });
+            }}
+            className={`bi fs-4 pointer ${
+              completed ? "bi-check-circle" : "bi-circle"
+            }`}
           ></i>
         </div>
       </Card>

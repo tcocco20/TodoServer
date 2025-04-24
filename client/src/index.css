@@ -21,3 +21,11 @@ a {
   height: calc(1.325rem + 0.9vw);
   border-radius: 50%;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.pointer:hover {
+  opacity: 0.8;
+}

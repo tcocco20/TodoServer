@@ -1,21 +1,19 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import AddTodo from "./AddTodo";
 import ProtectedRoute from "./ProtectedRoute";
 import TodoList from "./TodoList";
-import { Todo } from "../types/Todo";
+import { fetchTodos } from "../api";
+import { useQuery } from "@tanstack/react-query";
 
 const Dashboard = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const { data: todos } = useQuery({
+    queryKey: ["todos"],
+    queryFn: async () => {
+      return await fetchTodos();
+    },
+  });
+  
   const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const handleAddTodo = (title: string) => {
-    const newTodo: Todo = {
-      id: Math.random().toString(36).substr(2, 9),
-      title,
-      completed: true,
-    };
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
-  };
 
   const handleFocusInput = () => {
     if (inputRef.current) {
@@ -25,8 +23,8 @@ const Dashboard = () => {
 
   return (
     <ProtectedRoute>
-      <AddTodo onAddTodo={handleAddTodo} ref={inputRef} />
-      <TodoList todos={todos} onSelectAddTodo={handleFocusInput} />
+      <AddTodo ref={inputRef} />
+      <TodoList todos={todos || []} onSelectAddTodo={handleFocusInput} />
     </ProtectedRoute>
   );
 };
