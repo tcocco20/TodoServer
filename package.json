@@ -10,7 +10,9 @@
   "type": "module",
   "scripts": {
     "start": "npx tsx src/index.ts",
-    "dev": "npx tsx --watch src/index.ts"
+    "server": "npx tsx --watch src/index.ts",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +28,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
+    "concurrently": "^9.1.2",
     "cookie-session": "^2.1.0",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.42.0",
