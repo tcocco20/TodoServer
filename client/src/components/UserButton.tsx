@@ -7,8 +7,6 @@ interface UserButtonProps {
 }
 
 const UserButton = ({ user }: UserButtonProps) => {
-  console.log(user);
-
   const userImage = user.photoUrl ? (
     <img src={user.photoUrl} className="profilePhoto" alt="Profile picture" />
   ) : (
