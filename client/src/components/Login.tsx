@@ -8,9 +8,11 @@ const Login = () => {
   if (currentUser) return <Navigate to="/dashboard" />;
 
   return (
-    <section className="d-flex flex-column align-items-center justify-content-center py-5">
+    <section className="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center">
       <h1 className="mb-4">Welcome to the Todo App</h1>
-      <p>Log in to start managing and tracking your todo list!</p>
+      <p className="mb-2">
+        Log in to start managing and tracking your todo list!
+      </p>
       <Button as="a" href="/auth/google">
         Login With Google
       </Button>

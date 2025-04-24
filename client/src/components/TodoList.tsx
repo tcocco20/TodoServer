@@ -5,15 +5,16 @@ import ListSection from "./ListSection";
 
 interface TodoListProps {
   todos: Todo[];
+  onSelectAddTodo: () => void;
 }
 
-const TodoList = ({ todos }: TodoListProps) => {
+const TodoList = ({ todos, onSelectAddTodo }: TodoListProps) => {
   const EmptyList = () => {
     return (
-      <article className="text-center">
+      <article className="flex-grow-1 d-flex flex-column justify-content-center align-items-center text-center">
         <h3>You currently have no todos</h3>
-        <p>Click the button below to add a new todo</p>
-        <Button>Add New Todo</Button>
+        <p className="mb-2">Click the button below to add a new todo</p>
+        <Button onClick={onSelectAddTodo}>Add New Todo</Button>
       </article>
     );
   };
@@ -24,13 +25,13 @@ const TodoList = ({ todos }: TodoListProps) => {
     return (
       <Row>
         <ListSection title="Uncompleted Todos" todos={uncompletedTodos} />
-        <ListSection title="Completed Todos" todos={completedTodos} />
+        <ListSection title="Completed Todos" todos={completedTodos} completed />
       </Row>
     );
   };
 
   return (
-    <section className="py-3">
+    <section className="flex-grow-1 py-3 d-flex flex-column">
       {!todos.length ? <EmptyList /> : renderTodos()}
     </section>
   );
