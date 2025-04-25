@@ -8,7 +8,15 @@ const db = drizzle(DATABASE_URL);
 
 export const todoRoutes = (app: any) => {
   app.get("/api/todos", async (req: any, res: any) => {
-    const userId = req.user.id;
+    let userId;
+    try {
+      userId = req.user.id;
+    } catch (error) {
+      console.error("Error getting user ID:", error);
+      res.status(500).json({ error: "Failed to get user ID" });
+      res.redirect("/");
+      return;
+    }
     const usersTodos = await getTodos(db, userId);
 
     res.send(usersTodos);
