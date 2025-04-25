@@ -28,7 +28,10 @@ todoRoutes(app);
 
 if (ENVIRONMENT === "production") {
   app.use(express.static("client/dist"));
-  app.get(/.*/, (req, res) => {
+  app.get("/", (req, res) => {
+    res.sendFile(resolve(__dirname, "client", "dist", "index.html"));
+  });
+  app.get("/dashboard", (req, res) => {
     res.sendFile(resolve(__dirname, "client", "dist", "index.html"));
   });
 }
