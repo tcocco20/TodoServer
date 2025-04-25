@@ -14,7 +14,7 @@ const UserDropdownToggle = forwardRef(
           backgroundColor: "transparent",
           padding: 0,
         }}
-        className="border border-0"
+        className="border-0"
         ref={ref}
         onClick={(e) => {
           e.preventDefault();
