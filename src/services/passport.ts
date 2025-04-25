@@ -51,7 +51,6 @@ passport.use(
       if (existingUser.length > 0) {
         done(null, existingUser[0]);
       } else {
-        console.log("User does not exist in the database, creating a new user");
         const user: typeof usersTable.$inferInsert = {
           name: profile.displayName,
           googleId: profile.id,
@@ -59,8 +58,7 @@ passport.use(
         };
 
         try {
-          const insertResponse = await db.insert(usersTable).values(user);
-          console.log("Insert response:", insertResponse);
+          await db.insert(usersTable).values(user);
         } catch (error) {
           console.error("Error inserting user into the database", error);
           return done(error);

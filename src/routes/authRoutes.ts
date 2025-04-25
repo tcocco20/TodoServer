@@ -10,7 +10,6 @@ export const authRoutes = (app: any) => {
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     (req: any, res: any) => {
-      // Successful authentication, redirect home.
       res.redirect("/");
     }
   );
@@ -21,7 +20,6 @@ export const authRoutes = (app: any) => {
         console.error("Logout error:", err);
         return res.status(500).send("Logout failed");
       }
-      res.send(req.user);
     });
     res.redirect("/");
   });

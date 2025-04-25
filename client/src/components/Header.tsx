@@ -8,7 +8,13 @@ const Header = () => {
   const { currentUser } = useAuthContext();
 
   return (
-    <Navbar as="nav" bg="dark" data-bs-theme="dark" className="border-bottom">
+    <Navbar
+      as="nav"
+      bg="dark"
+      data-bs-theme="dark"
+      className="border-bottom"
+      fixed="top"
+    >
       <Container>
         <Navbar.Brand>Fullstack Todo App</Navbar.Brand>
         <div className="justify-content-end">
