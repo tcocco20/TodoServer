@@ -32,7 +32,7 @@ if (ENVIRONMENT === "production") {
     res.sendFile(resolve(__dirname, "client", "dist", "index.html"));
   });
   app.get("/dashboard", (req, res) => {
-    res.sendFile(resolve(__dirname, "client", "dist", "index.html"));
+    res.sendFile(resolve(__dirname, "../client", "dist", "index.html"));
   });
 }
 
