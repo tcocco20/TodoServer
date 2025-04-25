@@ -1,11 +1,15 @@
 import express from "express";
 import "./services/passport.ts";
+import { fileURLToPath } from "url";
 import { authRoutes } from "./routes/authRoutes.ts";
 import cookieSession from "cookie-session";
 import passport from "passport";
-import path from "path";
+import { dirname, resolve } from "path";
 import { COOKIE_KEY, ENVIRONMENT, PORT } from "./config/constants.ts";
 import { todoRoutes } from "./routes/todoRoutes.ts";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 
@@ -25,7 +29,7 @@ todoRoutes(app);
 if (ENVIRONMENT === "production") {
   app.use(express.static("client/dist"));
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+    res.sendFile(resolve(__dirname, "client", "dist", "index.html"));
   });
 }
 
