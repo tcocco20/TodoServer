@@ -1,6 +1,7 @@
+import type { Express, Request, Response } from "express";
 import passport from "passport";
 
-export const authRoutes = (app: any) => {
+export const authRoutes = (app: Express) => {
   app.get(
     "/auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
@@ -9,12 +10,12 @@ export const authRoutes = (app: any) => {
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
-    (req: any, res: any) => {
+    (req: Request, res: Response) => {
       res.redirect("/");
     }
   );
 
-  app.get("/api/logout", (req: any, res: any) => {
+  app.get("/api/logout", (req: Request, res: Response) => {
     req.logout((err: any) => {
       if (err) {
         console.error("Logout error:", err);
@@ -24,7 +25,7 @@ export const authRoutes = (app: any) => {
     res.redirect("/");
   });
 
-  app.get("/api/current_user", (req: any, res: any) => {
+  app.get("/api/current_user", (req: Request, res: Response) => {
     res.send(req.user);
   });
 };
