@@ -1,12 +1,16 @@
-import express from "express";
+import express, {
+  type NextFunction,
+  type Request,
+  type Response,
+} from "express";
 import "./services/passport.ts";
-import { fileURLToPath } from "url";
-import { authRoutes } from "./routes/authRoutes.ts";
+import { fileURLToPath } from "node:url";
+import authRoutes from "./routes/authRoutes.ts";
 import cookieSession from "cookie-session";
 import passport from "passport";
-import { dirname, resolve } from "path";
+import { dirname, resolve } from "node:path";
 import { COOKIE_KEY, ENVIRONMENT, PORT } from "./config/constants.ts";
-import { todoRoutes } from "./routes/todoRoutes.ts";
+import todoRoutes from "./routes/todoRoutes.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,9 +26,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
-
-authRoutes(app);
-todoRoutes(app);
+app.use(authRoutes);
+app.use(todoRoutes);
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  res.status(500).json({ error: err.message });
+});
 
 if (ENVIRONMENT === "production") {
   app.use(express.static("client/dist"));

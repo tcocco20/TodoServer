@@ -1,31 +1,34 @@
-import type { Express, Request, Response } from "express";
+import express, { type Request, type Response } from "express";
 import passport from "passport";
 
-export const authRoutes = (app: Express) => {
-  app.get(
-    "/auth/google",
-    passport.authenticate("google", { scope: ["profile", "email"] })
-  );
+const router = express.Router();
 
-  app.get(
-    "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/" }),
-    (req: Request, res: Response) => {
-      res.redirect("/");
-    }
-  );
+router;
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
-  app.get("/api/logout", (req: Request, res: Response) => {
-    req.logout((err: any) => {
-      if (err) {
-        console.error("Logout error:", err);
-        return res.status(500).send("Logout failed");
-      }
-    });
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req: Request, res: Response) => {
     res.redirect("/");
-  });
+  }
+);
 
-  app.get("/api/current_user", (req: Request, res: Response) => {
-    res.send(req.user);
+router.get("/api/logout", (req: Request, res: Response) => {
+  req.logout((err: any) => {
+    if (err) {
+      console.error("Logout error:", err);
+      return res.status(500).send("Logout failed");
+    }
   });
-};
+  res.redirect("/");
+});
+
+router.get("/api/current_user", (req: Request, res: Response) => {
+  res.send(req.user);
+});
+
+export default router;
