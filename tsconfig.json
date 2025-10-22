@@ -10,7 +10,7 @@
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "verbatimModuleSyntax": true,
-    "erasableSyntaxOnly": true,
+    "erasableSyntaxOnly": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }
