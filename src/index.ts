@@ -13,7 +13,7 @@ import passport from "passport";
 import { resolve } from "node:path";
 import { rootPath } from "./utilities/getRoot.ts";
 import { COOKIE_KEY, ENVIRONMENT, PORT } from "./config/constants.ts";
-import todoRoutes from "./routes/todoRoutes.ts";
+import { addRoutes } from "./routes/routes.config.ts";
 
 const app: Express = express();
 
@@ -29,7 +29,8 @@ app.use(express.json());
 
 app.use(authRoutes);
 
-app.use(todoRoutes);
+addRoutes(app);
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ error: err.message });
 });
