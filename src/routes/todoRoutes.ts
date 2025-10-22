@@ -4,9 +4,12 @@ import { todosTable } from "../db/schema.ts";
 import { getTodos } from "../utilities/getTodos.ts";
 import { eq } from "drizzle-orm";
 import express, { type Request, type Response } from "express";
+// import { TodosController } from "../todos/todos.controller.ts";
+// import { container } from "../config/container.ts";
 
 const db = drizzle(DATABASE_URL);
 const router = express.Router();
+// const todosController = container.get(TodosController); - not used yet
 
 router.get("/api/todos", async (req: Request, res: Response) => {
   let userId;
@@ -25,6 +28,7 @@ router.get("/api/todos", async (req: Request, res: Response) => {
 router.post("/api/todos", async (req: Request, res: Response) => {
   const { title } = req.body;
   const userId = req.user!.id;
+  // const newTodo = TodosController.createTodo(); // not used yet
 
   const newTodo = {
     userId,
@@ -42,6 +46,7 @@ router.post("/api/todos", async (req: Request, res: Response) => {
   const usersTodos = await getTodos(db, userId);
   res.send(usersTodos);
 });
+
 router.delete("/api/todos/:id", async (req: Request, res: Response) => {
   const todoId = +req.params.id;
   const userId = req.user.id;
